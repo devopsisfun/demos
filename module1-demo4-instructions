@@ -1,0 +1,42 @@
+Demo: Write a sample Docker-compose file using YAML
+➢ Run Wordpress on local host
+➢ Install docker-compose
+Commad: sudo apt-get install docker-compose
+➢ Create a new directory and create a new docker-compose file in it
+Command: sudo gedit docker-compose.yml
+Content of file docker-compose.yml
+------------------------------------------
+version: '2.0'
+services:
+db:
+image: mysql:5.7
+volumes:
+- db_data:/var/lib/mysql
+restart: always
+environment:
+MYSQL_ROOT_PASSWORD: somewordpress
+MYSQL_DATABASE: wordpress
+MYSQL_USER: wordpress
+MYSQL_PASSWORD: wordpress
+wordpress:
+depends_on:
+- db
+image: wordpress:latest
+ports:
+- "8000:80"
+restart: always
+environment:
+WORDPRESS_DB_HOST: db:3306
+WORDPRESS_DB_USER: wordpress
+WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+db_data:
+------------------------------------------
+
+➢ Run following command
+- docker-compose up -d
+
+-> check ifconfig
+Since your application is running on port 8000, to run the application over the server
+Write the IP address as http://docker_ip:8000, in this case which will be
+http://172.x.y.z:8000.
