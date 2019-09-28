@@ -1,0 +1,25 @@
+1. Create a sample html page to view on your httpd home
+Command: nano index.html
+File content of index.html
+---------------------------
+<html>
+<head><title>new page</title></head>
+<body><marquee><h1>IT ACTUALLY REALLY WORKS!!!</h1></marquee></body>
+</html>
+---------------------------
+
+2. Create a new docker file and add the following
+Command: sudo nano Dockerfile
+File content of Dockerfile
+---------------------------
+FROM httpd
+ADD index.html /usr/local/apache2/htdocs/
+---------------------------
+
+3. Build the dockerfile using docker build command
+Command: sudo docker build . -t demo
+
+4. Now run the build docker image
+Command: sudo docker run -it -p 8081:80 -d demo
+
+5. Verify by typing localhost:8081 in your browser url
