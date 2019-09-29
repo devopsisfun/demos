@@ -87,7 +87,7 @@ Step 8: Next, we will install kubeadm, kubelet and kubectl. Run the following co
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 	sudo apt-get update
-	apt-get install -y kubelet kubeadm kubectl
+	apt-get install kubeadm=1.15.4-00 kubelet=1.15.4-00 kubectl=1.15.4-00
 
 Step 9:
 1. Next, we will change the configuration file of Kubernetes. Run the following
@@ -120,7 +120,8 @@ Step 2:
 Step 3:
 	1. You will notice from the previous command, all the pods are running except
 one, kube-dns. For resolving this we will install a pod network. To install the	pod network, run the following command:
-	kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+	wget https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+	kubectl apply -f calico.yml
 	2. After some time, you will notice that all pods shift to the running state.
 
 ### Troubleshooting:
@@ -133,7 +134,8 @@ nameserver to 8.8.8.8
 need to restart the server with the flannel pod-network-cidr
 	sudo kubeadm reset 
 	sudo kubeadm init –apiserver-advertise-address=<kmaster-IP> --pod-network-cidr=10.244.0.0/16
-	kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+	wget https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+	kubectl apply -f kube-flannel.yml
 
 
 ### Steps for only node VM
