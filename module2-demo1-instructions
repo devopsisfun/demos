@@ -119,7 +119,7 @@ Step 2:
 	kubectl get pods -o wide --all-namespaces
 Step 3:
 	1. You will notice from the previous command, all the pods are running except
-one, kube-dns. For resolving this we will install a pod network. To install the	pod network, run the following command:
+one, coredns. For resolving this we will install a pod network. To install the	pod network, run the following command:
 	wget https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
 	kubectl apply -f calico.yml
 	2. After some time, you will notice that all pods shift to the running state.
