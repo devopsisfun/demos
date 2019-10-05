@@ -133,7 +133,7 @@ nameserver to 8.8.8.8
 	2) In case calico doesn’t start, use flannel instead as your pod network. To do that you’ll
 need to restart the server with the flannel pod-network-cidr
 	sudo kubeadm reset 
-	sudo kubeadm init –apiserver-advertise-address=<kmaster-IP> --pod-network-cidr=10.244.0.0/16
+	sudo kubeadm init --apiserver-advertise-address=<kmaster-IP> --pod-network-cidr=10.244.0.0/16
 	wget https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
 	kubectl apply -f kube-flannel.yml
 
