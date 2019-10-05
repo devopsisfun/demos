@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxserver
+spec:
+  containers:
+  - name: nginxserver
+    image: nginx
+    ports:
+    - containerPort: 80
+  - name: nginxwatcher
+    image: afakharany/watcher:latest
