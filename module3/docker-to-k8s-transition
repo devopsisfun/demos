@@ -1,0 +1,85 @@
+Step 1:
+Before putting the application on Kubernetes cluster, you need to perform the
+following steps:
+	a. Deploy a simple Docker container for webserver
+	b. Put a custom file for a static web-page
+	c. Create custom container image
+	d. Push it to Docker hub
+	e. Using the same image, deploy it on your Kubernetes cluster
+	
+a. Deploy a simple docker container for webserver
+Note: You can choose either apache or nginx
+
+We will use the latest release of the nginx and download from the default docker
+registry using the following command:
+	$sudo docker run -d -P --name webserver nginx
+
+Let’s see the default page of nginx. Get the port on which it is exposed using this
+command:
+	$sudo docker port webserver 
+
+Note: webserver is the name of the container which we provided
+
+Open the browser and use the routable IP to your host on which container is running.
+In our case, it is on host ‘kmaster’:
+
+b. Put a custom file for a static webpage
+Create a directory webserver using these commands
+	$mkdir webserver
+	cd webserver
+Create a file ‘index.html’ with some content to it using the command:
+	$gedit index.html
+View the contents of the file:
+	$cat index.html
+
+Under this, create a file ‘Dockerfile’ using the command:
+	$gedit Dockerfile
+
+Enter the following inside it:
+	FROM nginx
+	COPY index.html /usr/share/nginx/html/index.html
+
+c. Create custom container image
+	$sudo docker build -t new-nginx .
+Verify the image:
+	$sudo docker images
+
+d. Push the image to the docker hub
+First login to it:
+	$sudo docker login
+
+Then push the image:
+	$sudo docker tag new-nginx:latest devopsisfun/new-nginx:latest
+	$sudo docker push devopsisfun/new-nginx:latest
+
+e. Create the Kubernetes deployment
+	$kubectl create -f new-nginx1.yaml
+	$kubectl get deployments
+
+Expose the service to external network and note the port to which it is
+exposed. Here it is 31134:
+	$kubectl expose deployment new-nginx-deployment --type=NodePort --port=80
+	$kubectl get services
+Note the node on which it is running:
+	$kubectl get pods -o wide
+
+Now use knode<number> to browse
+
+Step 2:
+List all local deployments:
+	$kubectl get deployments
+
+Step 3:
+Create a kubectl proxy for forwarding communication to cluster-wide private
+network:
+	$kubectl proxy
+
+Step 4:
+Curl to verify that the app is running:
+	$curl localhost:31134
+
+Step 5:
+List all existing pods:
+	$ kubectl get pods --all-namespaces
+
+
