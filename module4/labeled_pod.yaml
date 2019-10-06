@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: label-pod
+  labels:
+    status: alpha
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-binding
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeSelector:
+    disktype: ssd
