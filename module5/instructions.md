@@ -26,7 +26,7 @@ Step4: Reading a secret in pod
 ## pod-affinity demo
 Step1: Create a deployment with 2 pods
   ```	
-  kubectl run nginx --image=nginx --replicas=2
+  	kubectl run nginx --image=nginx --replicas=2
 	root@kmaster:~# kubectl get po 
 	NAME                     READY   STATUS    RESTARTS   AGE
 	nginx-7bb7cd8db5-bqq26   1/1     Running   0          7s
@@ -93,7 +93,7 @@ Step7: This time, you can see that pod is assigned on knode2
 ### Taint and toleration demo
 Step1: taint a node
 ```
-	root@kmaster:# kubectl taint nodes knode2 scanner-app=true:NoSchedule
+root@kmaster:# kubectl taint nodes knode2 scanner-app=true:NoSchedule
 ```
 	verify by running kubectl describe no knode2
 
