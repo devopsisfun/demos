@@ -1,4 +1,4 @@
--# Command reference for labels
+## Command reference for labels
 
 # Check labels assigned to a pod
 kubectl get po --show-labels
@@ -22,7 +22,7 @@ kubectl get po -l status!=alpha
 # set based selection
 kubectl get po -l 'status in (ga,beta)'
 
--# Command reference for replica sets, replication controller, deployment
+## Command reference for replica sets, replication controller, deployment
 
 # scale a replicaset
 kubectl scale --replicas=2 rs/web
