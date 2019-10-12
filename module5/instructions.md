@@ -10,11 +10,15 @@ Step1: Create a secret
 	```kubectl create secret generic db-secret --from-literal=username=testuser --from-literal=password=testpasswd```
 
 Step2: Decoding a secret
-```	kubectl get secret db-secret -o yaml
-	echo 'dGVzdHBhc3N3ZA==' | base64 --decode```
+	```	
+	kubectl get secret db-secret -o yaml
+	echo 'dGVzdHBhc3N3ZA==' | base64 --decode
+	```
 
 Step3: create the pod
-	```kubectl create -f secret-pod.yaml```
+	```
+	kubectl create -f secret-pod.yaml
+	```
 
 Step4: Reading a secret in pod
 	login to pod and check the path where you have stored the secrets
