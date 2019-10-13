@@ -42,5 +42,6 @@ There are no answers given as this is hands-on exam. You are expected to solve t
 29. kubectl cp command 
 30. run ```kubectl top pod```
 31. create a namespace using kubectl 
+32. create a replicaset with 2 replicas and then scale it to 4 replicas
 
   
