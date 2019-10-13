@@ -7,3 +7,10 @@
 7. For init containers, what is the order of execution?
 8. What are default namespaces in kubernetes?
 9. What is "kubectl drain" and how it different from "kubectl cordon"?
+10. Should you apply resource limit on pod or on container?
+11. Should you apply resource limit on namespace?
+12. What is the scenario where you should use taints? Why taint and why not drain or cordon?
+13. Why you need daemonset when you can achieve same functionality through system services?
+14. What is the use of headless service?
+15. What type of workload/scenarios headless service should be used?
+16. When you should use stateful sets and when you should use deployments?
