@@ -1,3 +1,6 @@
+## CKA official link:
+https://www.cncf.io/certification/cka/
+
 ## kubectl cheat sheet:
 https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
