@@ -181,3 +181,33 @@ persistentvolumeclaim "pv-claim" deleted
 root@kmaster:# kubectl delete -f pv-volume.yaml 
 persistentvolume "pv-volume" deleted
 ```
+
+## Hostless 
+Step1: Create a deployment with 3 replicas
+```
+kubectl run  nginx --image=nginx --replicas=3
+```
+NOTE: we have used a different image because this image 
+
+Step2: Expose a headless service by setting --cluster-ip=None and expose a standartd service (ClusterIP type)
+```
+kubectl expose deployment nginx --name nginxheadless --cluster-ip=None
+service/nginxheadless exposed
+
+kubectl expose deployment nginx --name nginxclusterip --port=80  --target-port=80
+service/nginxclusterip exposed
+```
+
+Step3: To test these services, we need to run DNS queries and curl command. arunvelsriram/utils contains all the tool that we need.
+```
+kubectl run --generator=run-pod/v1 --rm utils -it --image arunvelsriram/utils bash
+If you don't see a command prompt, try pressing enter.
+root@utils:/# host nginxheadless
+nginxheadless.default.svc.cluster.local has address 10.4.1.14
+nginxheadless.default.svc.cluster.local has address 10.4.2.9
+nginxheadless.default.svc.cluster.local has address 10.4.1.13
+root@utils:/# host nginxclusterip
+nginxclusterip.default.svc.cluster.local has address 10.7.250.110
+```
+From above, you can see nginxclusterip just exposes one clusterip while nginxheadless exposes IP of all pods in the deployment.
+
